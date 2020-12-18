@@ -102,6 +102,17 @@ class _IssueState extends State<IssueRoute> {
               obscureText: false,
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
+                labelText: 'Enter Id',
+              ),
+          onSubmitted: (String value)  {
+            //futureAlbum = fetchAlbum();
+            _setId( value);
+              }
+            ),
+            TextField(
+              obscureText: false,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
                 labelText: 'Enter Student Name',
               ),
           onSubmitted: (String value)  {
@@ -138,8 +149,9 @@ class _IssueState extends State<IssueRoute> {
                   'Issue service for' + _name,
                   name: 'my.app.category'
                 );
-                futureCert = Certificate.issue("_name");
+                futureCert = Certificate.issue(_id, _name,_issueDate ,_validTill);
                 _setName(_name);
+                  //_setValidTill( futureCert );
               },
             ),
             ElevatedButton(
@@ -161,7 +173,7 @@ class _IssueState extends State<IssueRoute> {
                 name: 'my.app.category',
                 error: snapshot,
               );
-              return Text("${snapshot.error}");
+              return Expanded( child: Text("${snapshot.error}"));
             }
 
             // By default, show a loading spinner.
